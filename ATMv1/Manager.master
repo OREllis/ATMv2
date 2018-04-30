@@ -1,0 +1,31 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Manager.master.cs" Inherits="Manager" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="App_Themes/ATMManager/StyleSheet.css" rel="stylesheet" />
+
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div id="header">
+        <p>
+            Manager View</p>
+        <ul>
+            <asp:LinkButton ID="lBtnManagerHome" runat="server">Manager Home</asp:LinkButton>
+            
+            <asp:LinkButton ID="lBtnStartup" runat="server">System Startup</asp:LinkButton>
+          
+            <asp:LinkButton ID="lBtnMaintenance" runat="server">Maintenance</asp:LinkButton>
+        </ul>
+    </div>
+    <div id="content">
+        <asp:ContentPlaceHolder ID="CPHContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
