@@ -10,7 +10,7 @@ public class Manager : Person
 {
     private string mMachinePin;
 
-    public string getMachinePin(string pMachinePin)
+    public string getMachinePin()
     {
         return mMachinePin;
     }

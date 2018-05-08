@@ -9,16 +9,16 @@ using System.Web;
 public class Customer : Person
 {
 
-    private Dictionary<string, Account> mAccounts;
+    private Dictionary<int, Account> mAccounts;
 
     //get
-    public Dictionary<string, Account> getMachinePin()
+    public Dictionary<int, Account> getMachinePin()
     {
         return mAccounts;
     }
 
     //set
-    public void setMachinePin(Dictionary<string, Account> accountsIn)
+    public void setMachinePin(Dictionary<int, Account> accountsIn)
     {
         mAccounts = accountsIn;
     }
@@ -26,12 +26,12 @@ public class Customer : Person
     //default constructor
     public Customer() : base()
     {
-        mAccounts = new Dictionary<string, Account>();
+        mAccounts = new Dictionary<int, Account>();
     }
 
     //override where all vars for this and the base class are assigned on creation
     public Customer(string idIn, string forenameIn, string surnameIn, string homeAddressIn,
-        string telNoIn, string emailIn, Dictionary<string, Account> accountsIn) : 
+        string telNoIn, string emailIn, Dictionary<int, Account> accountsIn) : 
         base(idIn, forenameIn, surnameIn, homeAddressIn, telNoIn, emailIn)
     {
         mAccounts = accountsIn;
@@ -41,16 +41,14 @@ public class Customer : Person
     //adds Account parameter to dictionary and generates a random 4-digit pin as its key
     public void addAccount(Account accountIn)
     {
-        if (mAccounts.Where(x => x.Value.getAccountNumber() ==
-             (accountIn.getAccountNumber())) == null) {
-            mAccounts.Add(new Random().Next(1111, 10000).ToString(), accountIn);
+        if (mAccounts.Where(x => x.Value.getAccountNumber() == (accountIn.getAccountNumber())) == null) {
+            mAccounts.Add((mAccounts.Keys.Last()+1), accountIn);
         } 
     }
 
     //checks if inputPin exists in the dictionary, if it does it returns true, otherwise, false
-    public bool checkPin(string inputPin) {
-        bool validPin = (mAccounts.Where(x => x.Value.getPin().Equals(inputPin)) != null) ? true : false;
-        return validPin;
+    public bool checkPin(int inputPin) {
+        return (mAccounts.Where(x => x.Value.getPin().Equals(inputPin)) != null);
     }
 
     //returns the account where mPin = inputPin, returns null otherwise
