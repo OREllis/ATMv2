@@ -41,9 +41,18 @@ public class Customer : Person
     //adds Account parameter to dictionary and generates a random 4-digit pin as its key
     public void addAccount(Account accountIn)
     {
-        if (mAccounts.Where(x => x.Value.getAccountNumber() == (accountIn.getAccountNumber())) == null) {
-            mAccounts.Add((mAccounts.Keys.Last()+1), accountIn);
-        } 
+        //possible lambda option
+        //if (mAccounts.Where(x => x.Value.getAccountNumber() == (accountIn.getAccountNumber())) == null) {
+        //    mAccounts.Add((mAccounts.Keys.Last()+1), accountIn);
+        //}
+
+        foreach (KeyValuePair<int, Account> i in mAccounts)
+        {
+            if (i.Value.getAccountNumber() == accountIn.getAccountNumber())
+                throw new InvalidOperationException("Error, matching Account Numbers");
+        }
+
+        mAccounts.Add((mAccounts.Keys.Last() + 1), accountIn);
     }
 
     //checks if inputPin exists in the dictionary, if it does it returns true, otherwise, false
