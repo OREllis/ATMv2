@@ -10,7 +10,7 @@ public class Account
 {
     private string mAccountNumber, mPin;
     private decimal mBalance;
-    private int mSwallowed;
+
 
     //get accountNumber
     public string getAccountNumber() {
@@ -42,30 +42,18 @@ public class Account
         mBalance = balanceIn;
     }
 
-    //get swallowed
-    public int getSwallowed() {
-        return mSwallowed;
-    }
-
-    //set swallowed
-    public void setSwallowed(int swallowedIn) {
-        mSwallowed = swallowedIn;
-    }
-
 
     //default constructor
     public Account() {
         mAccountNumber = mPin = "";
         mBalance = 0;
-        mSwallowed = 0;
     }
 
     //setter constructor
-    public Account(string accountNumberIn, string pinIn, decimal balanceIn, int swallowedIn) {
+    public Account(string accountNumberIn, string pinIn, decimal balanceIn) {
         mAccountNumber = accountNumberIn;
         mPin = pinIn;
         mBalance = balanceIn;
-        mSwallowed = swallowedIn;
     }
 
 

@@ -10,8 +10,8 @@ public class Bank
 {
 
     private string mATMId;
-    private Dictionary<int, Manager> mBankManagers;
-    private Dictionary<int, Customer> mCustomers;
+    private Dictionary<string, Manager> mBankManagers;
+    private Dictionary<string, Customer> mCustomers;
     private int mCardsRetained, mFailedLogins, mTimesUsed;
     private decimal mExchangeRate, mTotalBalance, mWithdrawals;
 
@@ -20,16 +20,15 @@ public class Bank
         return mATMId;
     }
 
-    public void setATMId(string ATMIdIn)
-    {
+    public void setATMId(string ATMIdIn) {
         mATMId = ATMIdIn;
     }
 
-    public Dictionary<int, Manager> getBankManagers() {
+    public Dictionary<string, Manager> getBankManagers() {
         return mBankManagers;
     }
 
-    public Dictionary<int, Customer> getCustomers() {
+    public Dictionary<string, Customer> getCustomers() {
         return mCustomers;
     }
 
@@ -37,38 +36,31 @@ public class Bank
         return mCardsRetained;
     }
 
-    public void setCardsRetained(int cardsRetainedIn)
-    {
+    public void setCardsRetained(int cardsRetainedIn) {
         mCardsRetained = cardsRetainedIn;
     }
 
-    public int getFailedLogins()
-    {
+    public int getFailedLogins() {
         return mFailedLogins;
     }
 
-    public void setFailedLogins(int failedLoginsIn)
-    {
+    public void setFailedLogins(int failedLoginsIn) {
         mFailedLogins = failedLoginsIn;
     }
 
-    public int getTimesUsed()
-    {
+    public int getTimesUsed() {
         return mTimesUsed;
     }
 
-    public void setTimesUsed(int timesUsedIn)
-    {
+    public void setTimesUsed(int timesUsedIn) {
         mTimesUsed = timesUsedIn;
     }
 
-    public decimal getExchangeRate()
-    {
+    public decimal getExchangeRate() {
         return mExchangeRate;
     }
 
-    public void setExchangeRate(decimal exchangeRateIn)
-    {
+    public void setExchangeRate(decimal exchangeRateIn) {
         mExchangeRate = exchangeRateIn;
     }
 
@@ -81,11 +73,10 @@ public class Bank
     }
 
 
-    public Bank()
-    {
+    public Bank() {
         mATMId = "ABANK01";
-        mBankManagers = loadManagers();
-        mCustomers = new Dictionary<int, Customer>();
+        mBankManagers = new DAL1().loadManagers();
+        mCustomers = new DAL1().loadCustomers();
         mExchangeRate = 1.12M;
         mTimesUsed = 0;
         mWithdrawals = 0;     
@@ -94,34 +85,43 @@ public class Bank
         mCardsRetained = 0;
     }
 
-    public bool withdraw(int loginIn, string inputPin, int amount) {
+    public bool withdraw(string loginIn, string inputPin, int amount) {
         try
         {
-            if (mCustomers[loginIn].getAccount(inputPin).debit(amount))
+            //check if debit(amount) is true and the bank has the funds to withdraw
+            if (mCustomers[loginIn].getAccount(inputPin).debit(amount) && mTotalBalance >= amount)
             {
+                //adds amount to withdrawals & subtracts amount from total balance
                 mWithdrawals += amount;
                 mTotalBalance -= amount;
                 return true;
             }
-        }
-        catch (KeyNotFoundException) {
+
+            //if debit returns false or bank doesn't have enough funds
             return false;
         }
-
-        return false;
+        catch (KeyNotFoundException) {
+            //returns false if either loginIn or inputPin aren't valid
+            return false;
+        }
     }
 
-    public decimal getBalance(int loginIn, string inputPin)
-    {
+    public decimal getBalance(string loginIn, string inputPin) {
         return mCustomers[loginIn].getAccount(inputPin).getBalance();
     }
 
     public void addCustomer(Customer customerIn) {
-        if (mCustomers.Where(x => x.Value == customerIn) == null)
-            mCustomers.Add(mCustomers.Keys.Last() +1, customerIn);
+        //check if customer exists in dictionary
+        foreach (KeyValuePair<string, Customer> i in mCustomers) {
+            if (customerIn == i.Value)
+                return;
+        }
+
+        //add account if not
+        mCustomers.Add((mCustomers.Keys.Last() +1).ToString(), customerIn);
     }
 
-    public bool isValidManagerLogin(int manIdIn, string machinePinIn) {
+    public bool isValidManagerLogin(string manIdIn, string machinePinIn) {
         try {
             return (mBankManagers[manIdIn].getMachinePin() == machinePinIn);
         }
@@ -130,7 +130,7 @@ public class Bank
         }
     }
 
-    public bool isValidAccountLogin(int loginIn, int pinIn)
+    public bool isValidAccountLogin(string loginIn, string pinIn)
     {
         try{
             return (mCustomers[loginIn].checkPin(pinIn));

@@ -9,16 +9,16 @@ using System.Web;
 public class Customer : Person
 {
 
-    private Dictionary<int, Account> mAccounts;
+    private Dictionary<string, Account> mAccounts;
 
     //get
-    public Dictionary<int, Account> getMachinePin()
+    public Dictionary<string, Account> getMachinePin()
     {
         return mAccounts;
     }
 
     //set
-    public void setMachinePin(Dictionary<int, Account> accountsIn)
+    public void setMachinePin(Dictionary<string, Account> accountsIn)
     {
         mAccounts = accountsIn;
     }
@@ -26,15 +26,15 @@ public class Customer : Person
     //default constructor
     public Customer() : base()
     {
-        mAccounts = new Dictionary<int, Account>();
+        mAccounts = new Dictionary<string, Account>();
     }
 
     //override where all vars for this and the base class are assigned on creation
     public Customer(string idIn, string forenameIn, string surnameIn, string homeAddressIn,
-        string telNoIn, string emailIn, Dictionary<int, Account> accountsIn) : 
+        string telNoIn, string emailIn) : 
         base(idIn, forenameIn, surnameIn, homeAddressIn, telNoIn, emailIn)
     {
-        mAccounts = accountsIn;
+        mAccounts = new Dictionary<string, Account>();
     }
 
 
@@ -46,17 +46,17 @@ public class Customer : Person
         //    mAccounts.Add((mAccounts.Keys.Last()+1), accountIn);
         //}
 
-        foreach (KeyValuePair<int, Account> i in mAccounts)
+        foreach (KeyValuePair<string, Account> i in mAccounts)
         {
             if (i.Value.getAccountNumber() == accountIn.getAccountNumber())
-                throw new InvalidOperationException("Error, matching Account Numbers");
+                return;
         }
 
-        mAccounts.Add((mAccounts.Keys.Last() + 1), accountIn);
+        mAccounts.Add((mAccounts.Keys.Last() + 1).ToString(), accountIn);
     }
 
     //checks if inputPin exists in the dictionary, if it does it returns true, otherwise, false
-    public bool checkPin(int inputPin) {
+    public bool checkPin(string inputPin) {
         return (mAccounts.Where(x => x.Value.getPin().Equals(inputPin)) != null);
     }
 
