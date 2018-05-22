@@ -75,6 +75,10 @@ public class Bank
 
     public Bank() {
         mATMId = "ABANK01";
+
+        mBankManagers = new Dictionary<string, Manager>();
+        mCustomers = new Dictionary<string, Customer>();
+
         mBankManagers = new DAL1().loadManagers();
         mCustomers = new DAL1().loadCustomers();
         mExchangeRate = 1.12M;
@@ -110,15 +114,16 @@ public class Bank
         return mCustomers[loginIn].getAccount(inputPin).getBalance();
     }
 
-    public void addCustomer(Customer customerIn) {
+    public bool addCustomer(Customer customerIn) {
         //check if customer exists in dictionary
         foreach (KeyValuePair<string, Customer> i in mCustomers) {
             if (customerIn == i.Value)
-                return;
+                return false;
         }
 
         //add account if not
         mCustomers.Add((mCustomers.Keys.Last() +1).ToString(), customerIn);
+        return true;
     }
 
     public bool isValidManagerLogin(string manIdIn, string machinePinIn) {

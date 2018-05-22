@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Index.aspx.cs" Inherits="Index" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title></title>
@@ -11,8 +13,7 @@
     
     <div id="content">
         <asp:RadioButtonList ID="rblChoose" runat="server" RepeatDirection="Horizontal" 
-            Font-Bold="True" Font-Size="Large" ForeColor="#CCFF66" AutoPostBack="True" 
-            onselectedindexchanged="rblChoose_SelectedIndexChanged">
+            Font-Bold="True" Font-Size="Large" ForeColor="#CCFF66" AutoPostBack="True" >
            <%-- <asp:ListItem>Customer</asp:ListItem>--%>
             <asp:ListItem>Manager</asp:ListItem>
             <asp:ListItem>Customer</asp:ListItem>
