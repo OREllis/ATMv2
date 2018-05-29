@@ -15,11 +15,11 @@
         <p>
             Manager View</p>
         <ul>
-            <asp:LinkButton ID="lBtnManagerHome" runat="server">Manager Home</asp:LinkButton>
+            <asp:LinkButton ID="lBtnManagerHome" runat="server" PostBackUrl="~/Manager/ManagerHome.aspx">Manager Home</asp:LinkButton>
             
             <asp:LinkButton ID="lBtnStartup" runat="server">System Startup</asp:LinkButton>
           
-            <asp:LinkButton ID="lBtnMaintenance" runat="server">Maintenance</asp:LinkButton>
+            <asp:LinkButton ID="lBtnMaintenance" runat="server" PostBackUrl="~/Manager/Maintenance.aspx">Maintenance</asp:LinkButton>
         </ul>
     </div>
     <div id="content">

@@ -38,31 +38,22 @@ public class Customer : Person
     }
 
 
-    //adds Account parameter to dictionary and generates a random 4-digit pin as its key
+    //checks if account number key exists, if not, adds the passed account
     public void addAccount(Account accountIn)
     {
-        //possible lambda option
-        //if (mAccounts.Where(x => x.Value.getAccountNumber() == (accountIn.getAccountNumber())) == null) {
-        //    mAccounts.Add((mAccounts.Keys.Last()+1), accountIn);
-        //}
-
-        foreach (KeyValuePair<string, Account> i in mAccounts)
-        {
-            if (i.Value.getAccountNumber() == accountIn.getAccountNumber())
-                return;
-        }
-
-        mAccounts.Add((mAccounts.Keys.Last() + 1).ToString(), accountIn);
+        string accountNo = accountIn.getAccountNumber();
+        if (!mAccounts.ContainsKey(accountIn.getAccountNumber()))
+            mAccounts.Add(accountIn.getAccountNumber(), accountIn);
     }
 
     //checks if inputPin exists in the dictionary, if it does it returns true, otherwise, false
     public bool checkPin(string inputPin) {
-        return (mAccounts.Where(x => x.Value.getPin().Equals(inputPin)) != null);
+        return (mAccounts.TakeWhile(x => x.Value.getPin().Equals(inputPin)) != null);
     }
 
     //returns the account where mPin = inputPin, returns null otherwise
     public Account getAccount(string inputPin) {
-        return (Account)mAccounts.Where(x => x.Value.getPin().Equals(inputPin));
+        return (Account)mAccounts.TakeWhile(x => x.Value.getPin().Equals(inputPin));
     }
 
 

@@ -75,10 +75,6 @@ public class Bank
 
     public Bank() {
         mATMId = "ABANK01";
-
-        mBankManagers = new Dictionary<string, Manager>();
-        mCustomers = new Dictionary<string, Customer>();
-
         mBankManagers = new DAL1().loadManagers();
         mCustomers = new DAL1().loadCustomers();
         mExchangeRate = 1.12M;
@@ -127,23 +123,36 @@ public class Bank
     }
 
     public bool isValidManagerLogin(string manIdIn, string machinePinIn) {
-        try {
-            return (mBankManagers[manIdIn].getMachinePin() == machinePinIn);
-        }
-        catch (KeyNotFoundException) {
-            return false;
-        }
+        Manager foundMan;
+
+        if (mBankManagers.TryGetValue(manIdIn, out foundMan)) 
+            return foundMan.getMachinePin().Equals(machinePinIn);
+        
+
+        return false;
     }
 
-    public bool isValidAccountLogin(string loginIn, string pinIn)
-    {
-        try{
-            return (mCustomers[loginIn].checkPin(pinIn));
-        }
-        catch (KeyNotFoundException)
-        {
-            return false;
-        }
+    public bool isValidAccountLogin(string loginIn, string pinIn) {
+        //val to store trygetvalue result
+        Customer foundCust;
+
+        //return if foundCust's MachinePin = to pinIn parameter when value is found
+        if (mCustomers.TryGetValue(loginIn, out foundCust))
+            return foundCust.getMachinePin().Equals(pinIn);
+
+        //return false if value isn't found
+        return false;
+    }
+
+
+    public Manager getManager(string userLogin, string userPin) {
+        Manager foundMan;
+
+            if (mBankManagers.TryGetValue(userLogin, out foundMan) && foundMan.getMachinePin().Equals(userPin))
+                return foundMan;
+
+            return null;
+
     }
 
 
