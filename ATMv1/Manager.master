@@ -18,8 +18,12 @@
             <asp:LinkButton ID="lBtnManagerHome" runat="server" PostBackUrl="~/Manager/ManagerHome.aspx">Manager Home</asp:LinkButton>
             
             <asp:LinkButton ID="lBtnStartup" runat="server" PostBackUrl="~/Manager/SystemStartup.aspx"> Startup</asp:LinkButton>
-          
+
+            <asp:LinkButton ID="Shutdown" runat="server" PostBackUrl="~/Manager/CloseDown.aspx"> Close Down</asp:LinkButton>         
+                
             <asp:LinkButton ID="lBtnMaintenance" runat="server" PostBackUrl="~/Manager/Maintenance.aspx">Maintenance</asp:LinkButton>
+
+
         </ul>
     </div>
     <div id="content">

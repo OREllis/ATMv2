@@ -19,6 +19,11 @@ public partial class Index : System.Web.UI.Page
             rblChoose.Items[1].Enabled = true;
         }
 
+        if (rblChoose.Items[0].Selected == true || rblChoose.Items[1].Selected == true)
+            Login1.Visible = true;
+        else
+            Login1.Visible = false;
+
     }
 
 

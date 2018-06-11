@@ -5,18 +5,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Manager_SystemStartup : System.Web.UI.Page
+public partial class Customer_ViewBalance : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["hBos"] == null)
             Response.Redirect("~/Index.aspx");
-    }
 
-    protected void btnLoad_Click(object sender, EventArgs e)
-    {
-        //Bank aBank = (Bank)Session["hBos"];
+        Bank hBos = (Bank)Session["hBos"];
 
-        //aBank.loadData();
+        lblBalance.Text = hBos.getBalance((string)Session["login"], (string)Session["password"]).ToString();
     }
 }

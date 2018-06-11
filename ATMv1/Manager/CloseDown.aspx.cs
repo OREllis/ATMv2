@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Manager_SystemStartup : System.Web.UI.Page
+public partial class Manager_CloseDown : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -13,10 +13,9 @@ public partial class Manager_SystemStartup : System.Web.UI.Page
             Response.Redirect("~/Index.aspx");
     }
 
-    protected void btnLoad_Click(object sender, EventArgs e)
+    protected void btnCloseDown_Click(object sender, EventArgs e)
     {
-        //Bank aBank = (Bank)Session["hBos"];
-
-        //aBank.loadData();
+        Session["hBos"] = Session["login"] = Session["password"] = null;
+        Response.Redirect("~/Index.aspx");
     }
 }

@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="CPHContent" Runat="Server">
     <br />
-    <asp:RadioButton ID="rbtn10Pounds" runat="server" OnCheckedChanged="RadioButton1_CheckedChanged" Text="£10" />
+    <asp:RadioButton ID="rbtn10Pounds" runat="server" Text="£10" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:RadioButton ID="rbtn50Pounds" runat="server" Text="£50" />
     <br />
@@ -34,6 +34,8 @@
     <asp:Button ID="btnEnter" runat="server" OnClick="btnEnter_Click" Text="Continue" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="btnExit" runat="server" OnClick="btnExit_Click" Text="Exit" Width="77px" />
+&nbsp;&nbsp;&nbsp;
+    <asp:CheckBox ID="cbtnReceipt" runat="server" Text="View Receipt" />
     <br />
 &nbsp;
 </asp:Content>

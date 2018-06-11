@@ -85,6 +85,11 @@ public class Bank
         mCardsRetained = 0;
     }
 
+    public void loadData() {
+        //loads all user data from the database
+        new DAL2().LoadAllPersonData();
+    }
+
     public bool withdraw(string loginIn, string inputPin, decimal amount) {
         try
         {
@@ -138,7 +143,7 @@ public class Bank
 
         //return if foundCust's MachinePin = to pinIn parameter when value is found
         if (mCustomers.TryGetValue(loginIn, out foundCust))
-            return foundCust.getMachinePin().Equals(pinIn);
+            return foundCust.getMachinePin().ContainsKey(pinIn);
 
         //return false if value isn't found
         return false;

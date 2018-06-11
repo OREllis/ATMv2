@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="CPHContent" Runat="Server">
 
 
-    <asp:Label ID="Label1" runat="server" Text="Manager is logged in"></asp:Label>
+    <asp:Button ID="btnLoad" runat="server" OnClick="btnLoad_Click" Text="Load Bank Database" />
 
 
     </asp:Content>

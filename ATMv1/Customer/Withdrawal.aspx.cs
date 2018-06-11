@@ -56,6 +56,8 @@ public partial class Customer_Withdrawal : System.Web.UI.Page
         else
             txtAmount.Text = "Err. Insufficicent funds";
 
+
+
     }
 
     protected void btnExit_Click(object sender, EventArgs e)
