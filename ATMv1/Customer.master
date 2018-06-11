@@ -16,7 +16,7 @@
 <p>Customer's view</p>
        
         <ul>
-            <asp:LinkButton ID="lBtnHome" runat="server">Customer Home Page</asp:LinkButton>
+            <asp:LinkButton ID="lBtnHome" runat="server" PostBackUrl="~/Customer/CustomerHome.aspx"> Home</asp:LinkButton>
             <asp:LinkButton ID="lBtnBalance" runat="server">View Balance</asp:LinkButton>
             <asp:LinkButton ID="lBtnWithdraw" runat="server">Withdraw Cash</asp:LinkButton>
        

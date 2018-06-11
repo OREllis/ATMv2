@@ -85,7 +85,7 @@ public class Bank
         mCardsRetained = 0;
     }
 
-    public bool withdraw(string loginIn, string inputPin, int amount) {
+    public bool withdraw(string loginIn, string inputPin, decimal amount) {
         try
         {
             //check if debit(amount) is true and the bank has the funds to withdraw
